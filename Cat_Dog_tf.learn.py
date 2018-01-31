@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#Followed Sentdex tutorial
+
 import cv2                 # working with, mainly resizing, images
 import numpy as np         # dealing with arrays
 import os                  # dealing with directories
