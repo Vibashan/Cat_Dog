@@ -76,11 +76,8 @@ def process_test_data():
     np.save('test_data.npy', testing_data)
     return testing_data
 
-#train_data = create_train_data()
-#test_data = process_test_data()
-train_data = np.load('dog_train_data.npy')
-#test_data = np.load('test_data.npy')
-#data = train_data.read_data_sets
+train_data = create_train_data()
+test_data = process_test_data()
 
 def new_weights(shape):
     return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
@@ -206,13 +203,5 @@ def optimize(num_iterations):
                       "Train Accuracy = ", session.run(accuracy, feed_dict=feed_dict_train), 
                       "Test Accuracy = ", session.run(accuracy, feed_dict={x:test_x[0:500,:], y_true: test_y[0:500]}), 
                       "Duration = %.1f sec" % duration)
-            #acc = session.run(accuracy, feed_dict=feed_dict_train)
-            #msg = "Optimization Iteration: {0:>6}, Training Accuracy: {1:>6.1%}"
-            #print(msg.format(i + 1, acc))
-
-    total_iterations += num_iterations
-    end_time = time.time()
-    time_dif = end_time - start_time
-    print("Time usage: " + str(timedelta(seconds=int(round(time_dif)))))
 
 optimize(num_iterations=100)                                                        
