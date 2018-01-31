@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 import math
 import random
@@ -136,7 +138,7 @@ layer_conv4, weights_conv4 = new_conv_layer(input=layer_conv3,num_input_channels
 layer_conv5, weights_conv5 = new_conv_layer(input=layer_conv4,num_input_channels=num_filters4,filter_size=filter_size5,
                                             num_filters=num_filters5,use_pooling=True)
 
-layer_flat, num_features = flatten_layer(layer_conv3)
+layer_flat, num_features = flatten_layer(layer_conv5)
 layer_fc1 = new_fc_layer(input=layer_flat,num_inputs=num_features,num_outputs=fc_size,use_relu=True)
 layer_fc2 = new_fc_layer(input=layer_fc1,num_inputs=fc_size,num_outputs=num_classes,use_relu=False)
 
