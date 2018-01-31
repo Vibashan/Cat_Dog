@@ -13,10 +13,7 @@ MODEL_NAME = 'dogsvscats-{}-{}.model'.format(LR, '2conv-basic') # just so we rem
 
 def label_img(img):
     word_label = img.split('.')[-3]
-    # conversion to one-hot array [cat,dog]
-    #                            [much cat, no dog]
     if word_label == 'cat': return [1,0]
-    #                             [no cat, very doggo]
     elif word_label == 'dog': return [0,1]
 
 def create_train_data():
@@ -44,7 +41,7 @@ def process_test_data():
     np.save('test_data.npy', testing_data)
     return testing_data
 
-train_data = np.load('train_data.npy')
+train_data = create_train_data()
 # If u have aldready trained model use train_data = np.Load('train_data.npy')
 
 import tflearn
@@ -81,15 +78,6 @@ model = tflearn.DNN(convnet, tensorboard_dir='log')
 if os.path.exists('C:/Users/H/Desktop/KaggleDogsvsCats/{}.meta'.format(MODEL_NAME)):
     model.load(MODEL_NAME)
     print('model loaded!')
-
-train = train_data[:-500]
-test = train_data[-500:]
-
-X = np.array([i[0] for i in train]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
-Y = [i[1] for i in train]
-
-test_x = np.array([i[0] for i in test]).reshape(-1,IMG_SIZE,IMG_SIZE,1)
-test_y = [i[1] for i in test]
 
 model.fit({'input': X}, {'targets': Y}, n_epoch=10, validation_set=({'input': test_x}, {'targets': test_y}), 
     snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
