@@ -28,7 +28,7 @@ num_filters4 = 256
 filter_size5 = 4
 num_filters5 = 128
 # Fully-connected layer.
-fc_size = 1024         
+fc_size = 512        
 # Number of colo channels for the images: 1 channel for gray-scale.
 num_channels = 1
 # image dimensions (only squares for now)
